@@ -52,7 +52,7 @@
             border-radius: 10px;
             border: 1px solid #444;
             width: 100%;
-            height: 120px;
+            height: 200px;
             background: rgba(30, 30, 30, 0.9);
             color: #fff;
             outline: none;
@@ -86,142 +86,42 @@
             top: 20px;
             right: 20px;
             z-index: 30;
-            padding: 8px 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             color: white;
-            border-radius: 20px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 15px;
+            font-weight: 500;
             backdrop-filter: blur(5px);
-            transition: background 0.3s;
+            transition: all 0.3s;
             display: none; /* 初始隐藏 */
         }
         #reset-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 100, 100, 0.3);
+            border-color: rgba(255, 100, 100, 0.6);
+            transform: scale(1.05);
         }
 
-        /* 全屏按钮 */
-        #fullscreen-btn {
-            position: absolute;
-            top: 20px;
-            right: 160px;
-            z-index: 30;
-            padding: 8px 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            backdrop-filter: blur(5px);
-            transition: background 0.3s;
-        }
-        #fullscreen-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
 
-        /* 状态显示 */
-        #status-container {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px 20px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            pointer-events: none; /* 让鼠标穿透 */
-        }
+
+
 
         .highlight {
             color: #ff9900;
             font-weight: bold;
         }
 
-        /* 设置面板 */
-        #settings-panel {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            z-index: 30;
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            overflow: hidden;
-            width: 200px;
-        }
 
-        #settings-panel.minimized {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        #settings-panel.minimized:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        #settings-header {
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 14px;
-        }
-
-        #settings-content {
-            padding: 15px;
-            display: block;
-        }
-
-        #settings-panel.minimized #settings-content, 
-        #settings-panel.minimized #settings-title {
-            display: none;
-        }
-        
-        #settings-icon {
-            display: none;
-            width: 100%;
-            height: 100%;
-            line-height: 40px;
-            text-align: center;
-            font-size: 20px;
-        }
-        
-        #settings-panel.minimized #settings-icon {
-            display: block;
-        }
-
-        .setting-item {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .setting-item input {
-            width: auto;
-            margin-right: 10px;
-            cursor: pointer;
-        }
 
         /* 预览区域容器 */
         #preview-wrapper {
             position: absolute;
             bottom: 20px;
             right: 20px;
-            width: 160px;
-            height: 120px;
+            width: 320px;
+            height: 240px;
             border-radius: 10px;
             border: 2px solid rgba(255, 255, 255, 0.3);
             z-index: 10;
@@ -304,44 +204,22 @@
 </head>
 <body>
 
-    <!-- 全屏按钮 -->
-    <button id="fullscreen-btn">⛶ 全屏模式</button>
+
 
     <!-- 重置按钮 -->
-    <button id="reset-btn">↺ 重新输入文字</button>
+    <button id="reset-btn">↺ 重新开始</button>
 
     <!-- 输入 UI -->
     <div id="input-ui">
         <h2>✨ 魔法手势粒子设置 ✨</h2>
         <p style="color:#aaa; font-size: 14px; margin-bottom: 20px;">请输入文字，每行代表一次手势变换的内容</p>
-        <textarea id="textInput" placeholder="例如：&#10;3&#10;2&#10;1&#10;新年快乐&#10;Happy New Year&#10;2026">3&#10;2&#10;1&#10;新年快乐&#10;Happy New Year&#10;2026</textarea>
+        <textarea id="textInput" placeholder="例如：&#10;4&#10;3&#10;2&#10;1&#10;2026&#10;新年快乐&#10;Happy New Year&#10;💗">4&#10;3&#10;2&#10;1&#10;2026&#10;新年快乐&#10;Happy New Year&#10;💗</textarea>
         <button id="startBtn" class="primary-btn">开始体验 / 开启摄像头</button>
     </div>
 
-    <!-- 顶部状态栏 -->
-    <div id="status-container">
-        <div id="status">等待开启...</div>
-    </div>
 
-    <!-- 设置面板 -->
-    <div id="settings-panel" class="minimized">
-        <div id="settings-icon">⚙️</div>
-        <div id="settings-header">
-            <span id="settings-title">背景氛围设置</span>
-            <span style="font-size: 12px;">▼</span>
-        </div>
-        <div id="settings-content">
-            <label class="setting-item">
-                <input type="checkbox" id="check-fireworks" checked> 🎆 节日烟花
-            </label>
-            <label class="setting-item">
-                <input type="checkbox" id="check-meteors" checked> 🌠 随机流星
-            </label>
-            <div style="margin-top:10px; font-size: 12px; color:#888;">
-                再次点击齿轮可最小化
-            </div>
-        </div>
-    </div>
+
+
 
     <!-- 预览区域 (包含视频和画布) -->
     <div id="preview-wrapper">
@@ -377,17 +255,13 @@
         let time = 0;
 
         // 文字逻辑
-        let textLines = ["3", "2", "1", "新年快乐", "Happy New Year", "2026"];
+        let textLines = ["4", "3", "2", "1", "2026", "新年快乐", "Happy New Year", "💗"];
         let currentLineIndex = 0;
         
         // 辅助对象
         const dummyObject = new THREE.Object3D(); 
 
-        // 设置
-        let settings = {
-            fireworks: true,
-            meteors: true
-        };
+
 
         // DOM 元素
         const previewWrapper = document.getElementById('preview-wrapper');
@@ -398,12 +272,7 @@
         const textInput = document.getElementById('textInput');
         const startBtn = document.getElementById('startBtn');
         const resetBtn = document.getElementById('reset-btn');
-        const fullscreenBtn = document.getElementById('fullscreen-btn');
-        const statusDiv = document.getElementById('status');
         const inputUI = document.getElementById('input-ui');
-        const settingsPanel = document.getElementById('settings-panel');
-        const settingsIcon = document.getElementById('settings-icon');
-        const settingsHeader = document.getElementById('settings-header');
 
         // ----------------------------------------------------------------------
         // 2. 初始化与事件监听
@@ -415,34 +284,15 @@
         }
 
         function initUI() {
-            const togglePanel = () => settingsPanel.classList.toggle('minimized');
-            settingsIcon.addEventListener('click', togglePanel);
-            settingsHeader.addEventListener('click', togglePanel);
-
-            document.getElementById('check-fireworks').addEventListener('change', (e) => {
-                settings.fireworks = e.target.checked;
-            });
-            document.getElementById('check-meteors').addEventListener('change', (e) => {
-                settings.meteors = e.target.checked;
-            });
-
             parseText();
             textInput.addEventListener('input', parseText);
 
-            // 重置按钮逻辑
+            // 重置按钮逻辑 - 刷新页面
             resetBtn.addEventListener('click', () => {
-                inputUI.classList.remove('hidden');
-                resetBtn.style.display = 'none';
-                statusDiv.innerText = "请修改文字后重新点击开始";
+                location.reload();
             });
 
-            // 全屏按钮逻辑
-            fullscreenBtn.addEventListener('click', toggleFullscreen);
-            // 监听全屏变化，更新按钮文字
-            document.addEventListener('fullscreenchange', updateFullscreenButton);
-            document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
-            document.addEventListener('mozfullscreenchange', updateFullscreenButton);
-            document.addEventListener('MSFullscreenChange', updateFullscreenButton);
+
         }
 
         function parseText() {
@@ -457,7 +307,6 @@
             currentLineIndex = (currentLineIndex + 1) % textLines.length;
             const nextText = textLines[currentLineIndex];
             generateTextTargets(nextText);
-            statusDiv.innerHTML += ` <span style="font-size:12px; color:#aaa;">(切换: ${nextText})</span>`;
         }
 
         // ----------------------------------------------------------------------
@@ -654,8 +503,8 @@
 
         let fireworkTimer = 0;
         function updateBackground() {
-            if (settings.meteors) {
-                meteorSystem.visible = true;
+            // 流星效果始终开启
+            meteorSystem.visible = true;
                 const positions = meteorSystem.geometry.attributes.position.array;
                 for(let i=0; i<MAX_METEORS; i++) {
                     positions[i*3] -= meteorData[i].speed * 2;
@@ -665,12 +514,9 @@
                     }
                 }
                 meteorSystem.geometry.attributes.position.needsUpdate = true;
-            } else {
-                meteorSystem.visible = false;
-            }
-
-            if (settings.fireworks) {
-                fireworkSystem.visible = true;
+            
+            // 烟花效果始终开启
+            fireworkSystem.visible = true;
                 const fPos = fireworkSystem.geometry.attributes.position.array;
                 const fCol = fireworkSystem.geometry.attributes.customColor.array;
                 const fSize = fireworkSystem.geometry.attributes.size.array;
@@ -712,9 +558,6 @@
                 fireworkSystem.geometry.attributes.position.needsUpdate = true;
                 fireworkSystem.geometry.attributes.size.needsUpdate = true;
                 fireworkSystem.geometry.attributes.customColor.needsUpdate = true;
-            } else {
-                fireworkSystem.visible = false;
-            }
         }
 
         function launchFirework() {
@@ -926,14 +769,11 @@
 
                 if (avgDist > THRESHOLD) {
                     isHandOpen = true;
-                    statusDiv.innerHTML = `<span class='highlight'>状态: 张开 👋</span> ${textLines[currentLineIndex]}`;
                 } else {
                     isHandOpen = false;
-                    statusDiv.innerHTML = `<span class='highlight'>状态: 握拳 ✊</span> 能量积蓄中...`;
                 }
             } else {
                 isHandDetected = false;
-                statusDiv.innerHTML = "未检测到手势...请举手";
             }
         }
 
@@ -970,58 +810,14 @@
                 previewWrapper.style.display = "block";
                 inputUI.classList.add('hidden'); 
                 resetBtn.style.display = 'block';
-                statusDiv.innerText = "摄像头已就绪！试着张开和握紧手掌";
             } catch (error) {
                 console.error(error);
-                statusDiv.innerText = "错误：无法访问摄像头";
                 startBtn.innerText = "重试";
                 startBtn.disabled = false;
             }
         }
 
-        // ----------------------------------------------------------------------
-        // 9. 全屏功能
-        // ----------------------------------------------------------------------
-        function toggleFullscreen() {
-            if (!document.fullscreenElement && 
-                !document.webkitFullscreenElement && 
-                !document.mozFullScreenElement && 
-                !document.msFullscreenElement) {
-                // 进入全屏
-                const elem = document.documentElement;
-                if (elem.requestFullscreen) {
-                    elem.requestFullscreen();
-                } else if (elem.webkitRequestFullscreen) {
-                    elem.webkitRequestFullscreen();
-                } else if (elem.mozRequestFullScreen) {
-                    elem.mozRequestFullScreen();
-                } else if (elem.msRequestFullscreen) {
-                    elem.msRequestFullscreen();
-                }
-            } else {
-                // 退出全屏
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                } else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                }
-            }
-        }
 
-        function updateFullscreenButton() {
-            if (document.fullscreenElement || 
-                document.webkitFullscreenElement || 
-                document.mozFullScreenElement || 
-                document.msFullscreenElement) {
-                fullscreenBtn.innerHTML = '⛶ 退出全屏';
-            } else {
-                fullscreenBtn.innerHTML = '⛶ 全屏模式';
-            }
-        }
 
         init();
         startBtn.addEventListener('click', setupCamera);
