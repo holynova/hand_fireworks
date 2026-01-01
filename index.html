@@ -360,15 +360,15 @@
         // 主文字粒子系统
         let particleSystem, geometry;
         let particlesData = [];
-        // 粒子数量
-        const MAX_PARTICLES = 100000;
+        // 粒子数量 - 优化后减少75%提升性能
+        const MAX_PARTICLES = 25000;
         let targetPositions = []; 
         
         // 背景特效系统
         let meteorSystem, meteorGeo, meteorData = [];
         let fireworkSystem, fireworkGeo, fireworkData = [];
-        const MAX_METEORS = 100;
-        const MAX_FIREWORKS_PARTICLES = 6000;
+        const MAX_METEORS = 50;
+        const MAX_FIREWORKS_PARTICLES = 2000;
         
         // 状态变量
         let isHandOpen = false;
@@ -676,8 +676,8 @@
                 const fSize = fireworkSystem.geometry.attributes.size.array;
                 
                 fireworkTimer++;
-                if (fireworkTimer > 8) { 
-                    if (Math.random() > 0.2) launchFirework();
+                if (fireworkTimer > 12) { 
+                    if (Math.random() > 0.3) launchFirework();
                     fireworkTimer = 0;
                 }
 
@@ -738,7 +738,7 @@
         }
 
         function explodeFirework(x, y, z) {
-            const count = 100;
+            const count = 60;
             let spawned = 0;
             const hue = Math.random(); 
 
@@ -807,13 +807,21 @@
             const colors = particleSystem.geometry.attributes.customColor.array;
             const sizes = particleSystem.geometry.attributes.size.array;
 
+            // 缓存时间计算,避免重复计算
+            const time3 = time * 3;
+            const time2 = time * 2;
+            const time05 = time * 0.5;
+            const time03 = time * 0.3;
+
             let targetIndex = 0;
             const numTargets = targetPositions.length;
             
+            // 优化后的粒子更新循环
             for (let i = 0; i < MAX_PARTICLES; i++) {
-                const px = positions[i * 3];
-                const py = positions[i * 3 + 1];
-                const pz = positions[i * 3 + 2];
+                const i3 = i * 3;
+                const px = positions[i3];
+                const py = positions[i3 + 1];
+                const pz = positions[i3 + 2];
                 
                 if (isHandDetected && isHandOpen && numTargets > 0) {
                     // MODE: 汇聚 (Text)
@@ -825,59 +833,52 @@
                     }
                     
                     const noiseAmp = 2.0;
-                    const dx = Math.sin(time * 3 + py * 0.05) * noiseAmp;
-                    const dy = Math.cos(time * 2 + px * 0.05) * noiseAmp;
+                    const dx = Math.sin(time3 + py * 0.05) * noiseAmp;
+                    const dy = Math.cos(time2 + px * 0.05) * noiseAmp;
 
-                    positions[i * 3] += (target.x + dx - px) * 0.1;
-                    positions[i * 3 + 1] += (target.y + dy - py) * 0.1;
-                    positions[i * 3 + 2] += (target.z - pz) * 0.1;
+                    positions[i3] += (target.x + dx - px) * 0.1;
+                    positions[i3 + 1] += (target.y + dy - py) * 0.1;
+                    positions[i3 + 2] += (target.z - pz) * 0.1;
                     
-                    // 汇聚时稍微恢复一点原始金色，不再变幻彩虹色
-                    // 金色范围
-                    const hue = 0.1 + Math.sin(time + i)*0.02; 
-                    const color = new THREE.Color().setHSL(hue, 1.0, 0.5);
-                    colors[i * 3] = color.r;
-                    colors[i * 3 + 1] = color.g;
-                    colors[i * 3 + 2] = color.b;
+                    // 金色范围 - 直接计算 RGB 避免创建 Color 对象
+                    const hue = 0.1 + Math.sin(time + i) * 0.02;
+                    // 简化的 HSL 到 RGB 转换 (hue 在 0.08-0.12 范围)
+                    colors[i3] = 1.0;
+                    colors[i3 + 1] = 0.6 + hue * 2;
+                    colors[i3 + 2] = 0.0;
                     
-                    sizes[i] = 15; // 变大，显示金币质感
+                    sizes[i] = 15;
                     targetIndex++;
 
                 } else if (isHandDetected && !isHandOpen) {
-                    // MODE: 爆发 (Explode) - 改为向四周飞去
-                    // 简单的物理：位置 = 当前位置 + 速度
-                    // 速度方向 = 从原点指向当前位置 (px, py, pz) 的归一化向量
+                    // MODE: 爆发 (Explode)
+                    const speed = 0.08;
+                    const randX = (Math.random() - 0.5) * 10;
+                    const randY = (Math.random() - 0.5) * 10;
+                    const randZ = (Math.random() - 0.5) * 10;
                     
-                    // 为了让飞散更剧烈，给一个随时间增加的系数或者直接累加位置
-                    // 这里简单的逻辑：离中心越远跑得越快
-                    
-                    const speed = 0.08; // 飞散速度
-                    
-                    // X轴飞散
-                    positions[i * 3] += positions[i * 3] * speed + (Math.random()-0.5) * 10;
-                    // Y轴飞散
-                    positions[i * 3 + 1] += positions[i * 3 + 1] * speed + (Math.random()-0.5) * 10;
-                    // Z轴飞散
-                    positions[i * 3 + 2] += positions[i * 3 + 2] * speed + (Math.random()-0.5) * 10;
+                    positions[i3] += px * speed + randX;
+                    positions[i3 + 1] += py * speed + randY;
+                    positions[i3 + 2] += pz * speed + randZ;
 
-                    // 颜色变亮
-                    colors[i * 3] = 1.0; 
-                    colors[i * 3 + 1] = 0.8; 
-                    colors[i * 3 + 2] = 0.2;
+                    colors[i3] = 1.0; 
+                    colors[i3 + 1] = 0.8; 
+                    colors[i3 + 2] = 0.2;
                     
-                    sizes[i] = 20; // 飞散时金币更大
+                    sizes[i] = 20;
                 } else {
                     // MODE: 游离 (Idle)
                     const initial = particlesData[i].initialPos;
-                    const flowX = Math.sin(time * 0.5 + initial.y * 0.002) * 100;
-                    const flowY = Math.cos(time * 0.3 + initial.x * 0.002) * 100;
+                    const flowX = Math.sin(time05 + initial.y * 0.002) * 100;
+                    const flowY = Math.cos(time03 + initial.x * 0.002) * 100;
 
-                    positions[i * 3] += (initial.x + flowX - px) * 0.02;
-                    positions[i * 3 + 1] += (initial.y + flowY - py) * 0.02;
-                    positions[i * 3 + 2] += (initial.z - pz) * 0.02;
+                    positions[i3] += (initial.x + flowX - px) * 0.02;
+                    positions[i3 + 1] += (initial.y + flowY - py) * 0.02;
+                    positions[i3 + 2] += (initial.z - pz) * 0.02;
                     
-                    // 恢复暗金色
-                    colors[i * 3] = 0.8; colors[i * 3 + 1] = 0.6; colors[i * 3 + 2] = 0.1;
+                    colors[i3] = 0.8;
+                    colors[i3 + 1] = 0.6;
+                    colors[i3 + 2] = 0.1;
                     sizes[i] = 8;
                 }
             }
