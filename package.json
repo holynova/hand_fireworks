@@ -1,0 +1,19 @@
+{
+  "name": "hand-fireworks",
+  "version": "1.0.0",
+  "description": "3D hand gesture particle text effects",
+  "scripts": {
+    "start": "npx live-server --port=10010 --open=index.html"
+  },
+  "keywords": [
+    "three.js",
+    "mediapipe",
+    "particle",
+    "hand-gesture"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
