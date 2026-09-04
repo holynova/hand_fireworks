@@ -16,12 +16,16 @@
 
 访问 [GitHub Pages](https://your-username.github.io/hand_fireworks/)
 
+Cloudflare 地址：[hand-fireworks.xiaosang.cc](https://hand-fireworks.xiaosang.cc/)
+
 ### 本地运行
 
 ```bash
 npm install
 npm start
 ```
+
+本项目是单文件静态页面，无需构建；Cloudflare 直接发布根目录的 `index.html`。
 
 然后在浏览器中打开 http://localhost:8080
 
