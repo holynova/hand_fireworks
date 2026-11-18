@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1200" height="360" viewBox="0 0 1200 360"
+     role="img" aria-labelledby="title desc">
+  <title id="title">3D 手势粒子文字特效 — 握拳爆发，张掌成字</title>
+  <desc id="desc">黑夜底标题：3D 手势粒子文字特效，副标题握拳爆发，张掌成字；右侧是金色粒子烟花绽放，中心聚成 2026 四个数字。</desc>
+
+  <rect width="1200" height="360" rx="26" fill="#050505"/>
+
+  <g id="title-block" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <text x="56" y="62" font-size="19" letter-spacing="3" fill="#f2c200">手势控制 · THREE.JS × MEDIAPIPE</text>
+    <text x="56" y="128" font-size="52" font-weight="700" fill="#f8fafc">3D 手势粒子文字</text>
+    <text x="56" y="168" font-size="23" fill="#e2e8f0">握拳爆发，张掌成字</text>
+    <text x="56" y="204" font-size="19" fill="#94a3b8">摄像头前的手，就是 25,000 颗金色粒子的指挥棒。</text>
+    <g id="chips" font-size="18" fill="#e2e8f0" text-anchor="middle">
+      <g><rect x="56" y="238" width="132" height="36" rx="18" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="1.5"/><text x="122" y="262">25,000 粒子</text></g>
+      <g><rect x="200" y="238" width="118" height="36" rx="18" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="1.5"/><text x="259" y="262">手势控制</text></g>
+      <g><rect x="330" y="238" width="118" height="36" rx="18" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="1.5"/><text x="389" y="262">自定义文字</text></g>
+      <g><rect x="460" y="238" width="104" height="36" rx="18" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="1.5"/><text x="512" y="262">零构建</text></g>
+    </g>
+  </g>
+
+  <g id="firework">
+    <g id="burst" fill="#f2c200">
+      <circle cx="930" cy="150" r="5"/><circle cx="930" cy="72" r="3.5"/><circle cx="930" cy="228" r="3.5"/>
+      <circle cx="852" cy="150" r="3.5"/><circle cx="1008" cy="150" r="3.5"/>
+      <circle cx="875" cy="95" r="3"/><circle cx="985" cy="95" r="3"/><circle cx="875" cy="205" r="3"/><circle cx="985" cy="205" r="3"/>
+      <circle cx="930" cy="108" r="2.5"/><circle cx="930" cy="192" r="2.5"/><circle cx="888" cy="150" r="2.5"/><circle cx="972" cy="150" r="2.5"/>
+      <circle cx="900" cy="120" r="2.5"/><circle cx="960" cy="120" r="2.5"/><circle cx="900" cy="180" r="2.5"/><circle cx="960" cy="180" r="2.5"/>
+      <circle cx="930" cy="48" r="2"/><circle cx="930" cy="252" r="2"/><circle cx="828" cy="150" r="2"/><circle cx="1032" cy="150" r="2"/>
+    </g>
+    <g id="burst2" fill="#ff8c42">
+      <circle cx="820" cy="80" r="2.5"/><circle cx="1040" cy="220" r="2.5"/><circle cx="1040" cy="80" r="2"/><circle cx="820" cy="220" r="2"/>
+    </g>
+    <g id="burst3" fill="#ffffff">
+      <circle cx="870" cy="60" r="1.8"/><circle cx="990" cy="60" r="1.8"/><circle cx="870" cy="240" r="1.8"/><circle cx="990" cy="240" r="1.8"/>
+    </g>
+    <g id="digits" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+      <text x="930" y="322" font-size="44" font-weight="700" fill="#f2c200" text-anchor="middle" letter-spacing="8">2026</text>
+    </g>
+    <g id="gesture-label" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+      <text x="930" y="348" font-size="16" fill="#94a3b8" text-anchor="middle">✊ 爆发 · 👋 聚合 · 张掌切换下一行</text>
+    </g>
+  </g>
+</svg>
